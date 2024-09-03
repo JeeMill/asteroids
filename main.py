@@ -1,6 +1,7 @@
 import pygame
 from constants import *
 import player, asteroid, asteroidfield
+import sys
 
 def main():
     pygame.init()
@@ -51,6 +52,10 @@ def main():
             a.update(dt)
             a.draw(screen)
 
+        for c in asteroids:
+            if c.collision(character) == True:
+                print("Game Over!")
+                sys.exit()
          
         # Update screen after receiving all inputs
         pygame.display.flip()
