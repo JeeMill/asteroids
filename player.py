@@ -12,7 +12,7 @@ class Player(circleshape.CircleShape):
         self.y = y
         self.position = pygame.Vector2(x, y)
         self.rotation = 0
-        
+        self.timer = 0    
         # super has position, velociy, radius
 
     # in the player class
@@ -35,11 +35,15 @@ class Player(circleshape.CircleShape):
         self.position += forward * constants.PLAYER_SPEED * dt
 
     def shoot(self):
-        bullet = shot.Shot(self.x, self.y, constants.SHOT_RADIUS)
-        bullet.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * constants.PLAYER_SHOT_SPEED
+        
+        if self.timer < 0:    
+            bullet = shot.Shot(self.position.x, self.position.y, constants.SHOT_RADIUS)
+            bullet.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * constants.PLAYER_SHOT_SPEED
+        self.timer = constants.PLAYER_SHOOT_COOLDOWN
 
     def update(self, dt):
         keys = pygame.key.get_pressed()
+        self.timer -= dt
 
         # Left
         if keys[pygame.K_a]:
@@ -60,3 +64,4 @@ class Player(circleshape.CircleShape):
         # Shoot
         if keys[pygame.K_SPACE]:
             self.shoot()
+            
