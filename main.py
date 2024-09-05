@@ -32,7 +32,7 @@ def main():
     updatable.add(ast)
 
     # Instantiate Shots
-    shot.Shot.containers = (updatable, drawable)
+    shot.Shot.containers = (updatable, drawable, shots)
     
     while True:
         for event in pygame.event.get():
@@ -59,6 +59,11 @@ def main():
             if c.collision(character) == True:
                 print("Game Over!")
                 sys.exit()
+
+            for s in shots:
+                if c.collision(s) == True:
+                    c.kill()
+                    s.kill()
          
         # Update screen after receiving all inputs
         pygame.display.flip()
