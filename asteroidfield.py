@@ -56,5 +56,5 @@ class AsteroidField(pygame.sprite.Sprite):
             kind = random.randint(1, ASTEROID_KINDS)
             
             #chatgpt
-            self.spawn(ASTEROID_MAX_RADIUS, position, velocity)
+            self.spawn(ASTEROID_MAX_RADIUS * kind, position, velocity)
 

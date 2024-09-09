@@ -62,7 +62,7 @@ def main():
 
             for s in shots:
                 if c.collision(s) == True:
-                    c.kill()
+                    c.split()
                     s.kill()
          
         # Update screen after receiving all inputs
